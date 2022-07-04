@@ -3,7 +3,7 @@ import {Layout, Typography, Input, Menu, Button, Dropdown} from 'antd'
 import {GlobalOutlined} from '@ant-design/icons'
 import styles from './Header.module.scss'
 import logo from '../../assets/logo.svg';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 
 
 export const Header: React.FC = () => {
@@ -37,10 +37,10 @@ export const Header: React.FC = () => {
         </div>
       </div>
       <Layout.Header className={styles['main-header']}>
-        <span onClick={() => navigate('/')}>
+        <Link to={'detail/123'}>
           <img src={logo} alt="logo" className={styles['App-logo']}/>
           <Typography.Title level={3} className={styles.title}>React 旅游网</Typography.Title>
-        </span>
+        </Link>
         <Input.Search
           placeholder={'请输入旅游目的地、主题、或关键字'}
           className={styles['search-input']}
