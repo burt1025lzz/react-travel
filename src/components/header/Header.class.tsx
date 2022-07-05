@@ -13,7 +13,7 @@ interface State {
 }
 
 export class Header extends React.Component<{}, State> {
-  
+
   constructor(props) {
     super(props);
     const storeState = store.getState()
@@ -26,6 +26,14 @@ export class Header extends React.Component<{}, State> {
     }
   }
 
+  menuClickHandle = (e) => {
+    const action = {
+      type: 'change_language',
+      payload: e.key
+    }
+    store.dispatch(action)
+  }
+
   render() {
     return (
       <div className={styles['app-header']}>
@@ -34,7 +42,7 @@ export class Header extends React.Component<{}, State> {
             <Typography.Text>让旅游更幸福</Typography.Text>
             <Dropdown.Button
               style={{marginLeft: 15}}
-              overlay={<Menu items={this.state.languageList}/>}
+              overlay={<Menu items={this.state.languageList} onClick={this.menuClickHandle}/>}
               icon={<GlobalOutlined/>}
             >
               {this.state.language === 'zh' ? '中文' : 'English'}
