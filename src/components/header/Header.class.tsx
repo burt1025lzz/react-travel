@@ -4,9 +4,26 @@ import {GlobalOutlined} from '@ant-design/icons'
 import styles from './Header.module.scss'
 import logo from '../../assets/logo.svg';
 import {Link} from 'react-router-dom'
+import store from "../../redux/store";
 
+interface State {
+  language: string
+  languageList: { label: string, key: string }[]
+}
 
-export class Header extends React.Component{
+export class Header extends React.Component<{}, State> {
+  constructor(props) {
+    super(props);
+    const storeState = store.getState()
+    this.state = {
+      language: storeState.language,
+      languageList: storeState.languageList.map(item => ({
+        label: item.name,
+        key: item.code
+      }))
+    }
+  }
+
   render() {
     return (
       <div className={styles['app-header']}>
@@ -15,20 +32,10 @@ export class Header extends React.Component{
             <Typography.Text>让旅游更幸福</Typography.Text>
             <Dropdown.Button
               style={{marginLeft: 15}}
-              overlay={
-                <Menu
-                  items={[{
-                    key: 1,
-                    label: `中文`
-                  }, {
-                    key: 2,
-                    label: `English`
-                  }]}
-                />
-              }
+              overlay={<Menu items={this.state.languageList}/>}
               icon={<GlobalOutlined/>}
             >
-              语言
+              {this.state.language === 'zh' ? '中文' : 'English'}
             </Dropdown.Button>
             <Button.Group className={styles['button-group']}>
               <Link to={'register'}>
