@@ -5,11 +5,11 @@ import styles from './Header.module.scss'
 import logo from '../../assets/logo.svg';
 import {Link} from 'react-router-dom'
 import store from "../../redux/store";
+import {LanguageState} from '../../redux/languageReducer'
 import {navigationData} from './mockups'
 
-interface State {
-  language: string
-  languageList: { label: string, key: string }[]
+
+interface State extends LanguageState {
 }
 
 export class Header extends React.Component<{}, State> {
@@ -19,17 +19,33 @@ export class Header extends React.Component<{}, State> {
     const storeState = store.getState()
     this.state = {
       language: storeState.language,
-      languageList: storeState.languageList.map(item => ({
-        label: item.name,
-        key: item.code
-      }))
+      languageList: storeState.languageList
     }
   }
 
+  componentDidMount() {
+    store.subscribe(() => {
+      const storeState = store.getState()
+      this.setState({
+        language: storeState.language,
+        languageList: storeState.languageList
+      })
+    })
+  }
+
   menuClickHandle = (e) => {
-    const action = {
-      type: 'change_language',
-      payload: e.key
+    let action
+    if (e.key === 'new') {
+      // 新语言添加
+      action = {
+        type: 'add_language',
+        payload: {code: 'new_language', name: '新语言'}
+      }
+    } else {
+      action = {
+        type: 'change_language',
+        payload: e.key
+      }
     }
     store.dispatch(action)
   }
@@ -42,7 +58,14 @@ export class Header extends React.Component<{}, State> {
             <Typography.Text>让旅游更幸福</Typography.Text>
             <Dropdown.Button
               style={{marginLeft: 15}}
-              overlay={<Menu items={this.state.languageList} onClick={this.menuClickHandle}/>}
+              overlay={
+                <Menu onClick={this.menuClickHandle}>
+                  {this.state.languageList.map(item => (
+                    <Menu.Item key={item.code}>{item.name}</Menu.Item>
+                  ))}
+                  <Menu.Item key={'new'}>新增语言</Menu.Item>
+                </Menu>
+              }
               icon={<GlobalOutlined/>}
             >
               {this.state.language === 'zh' ? '中文' : 'English'}
