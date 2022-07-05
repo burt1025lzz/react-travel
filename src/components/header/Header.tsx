@@ -5,44 +5,59 @@ import styles from './Header.module.scss'
 import logo from '../../assets/logo.svg';
 import {useNavigate, Link} from 'react-router-dom'
 import {navigationData} from './mockups'
+import {useSelector} from "../../redux/hooks";
+import {useDispatch} from "react-redux";
+import {useTranslation} from 'react-i18next';
+import {changeLanguageActionCreator, addLanguageActionCreator} from "../../redux/language/languageActions";
+// import {Dispatch} from "redux";
+// import {LanguageActionTypes} from "../../redux/language/languageActions";
 
 export const Header: React.FC = () => {
   const navigate = useNavigate()
+  const {t} = useTranslation()
+  const language = useSelector(state => state.language)
+  const languageList = useSelector(state => state.languageList)
+  const dispatch = useDispatch()
+  const menuClickHandle = (e) => {
+    if (e.key === 'new') {
+      dispatch(addLanguageActionCreator('新语言', 'new_language'))
+    } else {
+      dispatch(changeLanguageActionCreator(e.key))
+    }
+  }
+  // const dispatch = useDispatch<Dispatch<LanguageActionTypes>>()
   return (
     <div className={styles['app-header']}>
       <div className={styles['top-header']}>
         <div className={styles.inner}>
-          <Typography.Text>让旅游更幸福</Typography.Text>
+          <Typography.Text>{t('header.slogan')}</Typography.Text>
           <Dropdown.Button
             style={{marginLeft: 15}}
             overlay={
-              <Menu
-                items={[{
-                  key: 1,
-                  label: `中文`
-                }, {
-                  key: 2,
-                  label: `English`
-                }]}
-              />
+              <Menu onClick={menuClickHandle}>
+                {languageList.map(item => (
+                  <Menu.Item key={item.code}>{item.name}</Menu.Item>
+                ))}
+                <Menu.Item key={'new'}>{t('header.add_new_language')}</Menu.Item>
+              </Menu>
             }
             icon={<GlobalOutlined/>}
           >
-            语言
+            {language === 'zh' ? '中文' : 'English'}
           </Dropdown.Button>
           <Button.Group className={styles['button-group']}>
-            <Button onClick={() => navigate('/register')}>注册</Button>
-            <Button onClick={() => navigate('/login')}>登录</Button>
+            <Button onClick={() => navigate('/register')}>{t('header.register')}</Button>
+            <Button onClick={() => navigate('/login')}>{t('header.login')}</Button>
           </Button.Group>
         </div>
       </div>
       <Layout.Header className={styles['main-header']}>
         <Link to={'detail/123'}>
           <img src={logo} alt="logo" className={styles['App-logo']}/>
-          <Typography.Title level={3} className={styles.title}>React 旅游网</Typography.Title>
+          <Typography.Title level={3} className={styles.title}>{t('header.title')}</Typography.Title>
         </Link>
         <Input.Search
-          placeholder={'请输入旅游目的地、主题、或关键字'}
+          placeholder={t('header.placeholder')}
           className={styles['search-input']}
         />
       </Layout.Header>
