@@ -7,12 +7,13 @@ import {Link} from 'react-router-dom'
 import store from "../../redux/store";
 import {LanguageState} from '../../redux/languageReducer'
 import {navigationData} from './mockups'
+import {withTranslation, WithTranslation} from "react-i18next";
 
 
 interface State extends LanguageState {
 }
 
-export class Header extends React.Component<{}, State> {
+class HeaderComponent extends React.Component<WithTranslation, State> {
 
   constructor(props) {
     super(props);
@@ -51,11 +52,12 @@ export class Header extends React.Component<{}, State> {
   }
 
   render() {
+    const {t} = this.props
     return (
       <div className={styles['app-header']}>
         <div className={styles['top-header']}>
           <div className={styles.inner}>
-            <Typography.Text>让旅游更幸福</Typography.Text>
+            <Typography.Text>{t('header.slogan')}</Typography.Text>
             <Dropdown.Button
               style={{marginLeft: 15}}
               overlay={
@@ -63,7 +65,7 @@ export class Header extends React.Component<{}, State> {
                   {this.state.languageList.map(item => (
                     <Menu.Item key={item.code}>{item.name}</Menu.Item>
                   ))}
-                  <Menu.Item key={'new'}>新增语言</Menu.Item>
+                  <Menu.Item key={'new'}>{t('header.add_new_language')}</Menu.Item>
                 </Menu>
               }
               icon={<GlobalOutlined/>}
@@ -72,10 +74,10 @@ export class Header extends React.Component<{}, State> {
             </Dropdown.Button>
             <Button.Group className={styles['button-group']}>
               <Link to={'register'}>
-                <Button>注册</Button>
+                <Button>{t('header.register')}</Button>
               </Link>
               <Link to={'login'}>
-                <Button>登录</Button>
+                <Button>{t('header.login')}</Button>
               </Link>
             </Button.Group>
           </div>
@@ -83,10 +85,10 @@ export class Header extends React.Component<{}, State> {
         <Layout.Header className={styles['main-header']}>
           <Link to={'detail/123'}>
             <img src={logo} alt="logo" className={styles['App-logo']}/>
-            <Typography.Title level={3} className={styles.title}>React 旅游网</Typography.Title>
+            <Typography.Title level={3} className={styles.title}>{t('header.title')}</Typography.Title>
           </Link>
           <Input.Search
-            placeholder={'请输入旅游目的地、主题、或关键字'}
+            placeholder={t('header.placeholder')}
             className={styles['search-input']}
           />
         </Layout.Header>
@@ -95,3 +97,5 @@ export class Header extends React.Component<{}, State> {
     )
   }
 }
+
+export const Header = withTranslation()(HeaderComponent)
