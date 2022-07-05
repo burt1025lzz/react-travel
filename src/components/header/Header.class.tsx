@@ -45,6 +45,10 @@ class HeaderComponent extends React.Component<PropsType> {
 
   render() {
     const {t, language, languageList} = this.props
+    const navigationList = navigationData.map(item => ({
+      key: item.key,
+      label: t(item.label)
+    }))
     return (
       <div className={styles['app-header']}>
         <div className={styles['top-header']}>
@@ -84,7 +88,7 @@ class HeaderComponent extends React.Component<PropsType> {
             className={styles['search-input']}
           />
         </Layout.Header>
-        <Menu mode={"horizontal"} className={styles['main-menu']} items={navigationData}/>
+        <Menu mode={"horizontal"} className={styles['main-menu']} items={navigationList}/>
       </div>
     )
   }

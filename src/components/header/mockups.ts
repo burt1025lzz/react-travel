@@ -3,50 +3,50 @@
  * */
 export const navigationData = [{
   key: 1,
-  label: `旅游首页`
+  label: `header.home_page`
 }, {
   key: 2,
-  label: `周末游`
+  label: `header.weekend`
 }, {
   key: 3,
-  label: `跟团游`
+  label: `header.group`
 }, {
   key: 4,
-  label: ` 自由行 `
+  label: `header.backpack`
 }, {
   key: 5,
-  label: ` 私家团 `
+  label: `header.private`
 }, {
   key: 6,
-  label: ` 邮轮 `
+  label: `header.cruise`
 }, {
   key: 7,
-  label: ` 酒店+景点 `
+  label: `header.hotel`
 }, {
   key: 8,
-  label: ` 当地玩乐 `
+  label: `header.local`
 }, {
   key: 9,
-  label: ` 主题游 `
+  label: `header.theme`
 }, {
   key: 10,
-  label: ` 定制游 `
+  label: `header.custom`
 }, {
   key: 11,
-  label: ` 游学 `
+  label: `header.study`
 }, {
   key: 12,
-  label: ` 签证 `
+  label: `header.visa`
 }, {
   key: 13,
-  label: ` 企业游 `
+  label: `header.enterprise`
 }, {
   key: 14,
-  label: ` 高端游 `
+  label: `header.high_end`
 }, {
   key: 15,
-  label: ` 爱玩户外 `
+  label: `header.outdoor`
 }, {
   key: 16,
-  label: ` 保险 `
+  label: `header.insurance`
 }]

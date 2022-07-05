@@ -15,6 +15,10 @@ import {changeLanguageActionCreator, addLanguageActionCreator} from "../../redux
 export const Header: React.FC = () => {
   const navigate = useNavigate()
   const {t} = useTranslation()
+  const navigationList = navigationData.map(item => ({
+    key: item.key,
+    label: t(item.label)
+  }))
   const language = useSelector(state => state.language)
   const languageList = useSelector(state => state.languageList)
   const dispatch = useDispatch()
@@ -61,7 +65,7 @@ export const Header: React.FC = () => {
           className={styles['search-input']}
         />
       </Layout.Header>
-      <Menu mode={"horizontal"} className={styles['main-menu']} items={navigationData}/>
+      <Menu mode={"horizontal"} className={styles['main-menu']} items={navigationList}/>
     </div>
   )
 }
