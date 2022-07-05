@@ -5,9 +5,10 @@ import styles from './Header.module.scss'
 import logo from '../../assets/logo.svg';
 import {Link} from 'react-router-dom'
 import store from "../../redux/store";
-import {LanguageState} from '../../redux/languageReducer'
+import {LanguageState} from '../../redux/language/languageReducer'
 import {navigationData} from './mockups'
 import {withTranslation, WithTranslation} from "react-i18next";
+import {addLanguageActionCreator, changeLanguageActionCreator} from "../../redux/language/languageActions";
 
 
 interface State extends LanguageState {
@@ -37,16 +38,9 @@ class HeaderComponent extends React.Component<WithTranslation, State> {
   menuClickHandle = (e) => {
     let action
     if (e.key === 'new') {
-      // 新语言添加
-      action = {
-        type: 'add_language',
-        payload: {code: 'new_language', name: '新语言'}
-      }
+      action = addLanguageActionCreator('新语言', 'new_language')
     } else {
-      action = {
-        type: 'change_language',
-        payload: e.key
-      }
+      action = changeLanguageActionCreator(e.key)
     }
     store.dispatch(action)
   }
