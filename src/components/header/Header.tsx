@@ -19,8 +19,8 @@ export const Header: React.FC = () => {
     key: item.key,
     label: t(item.label)
   }))
-  const language = useSelector(state => state.language)
-  const languageList = useSelector(state => state.languageList)
+  const language = useSelector(state => state.language.language)
+  const languageList = useSelector(state => state.language.languageList)
   const dispatch = useDispatch()
   const menuClickHandle = (e) => {
     if (e.key === 'new') {
