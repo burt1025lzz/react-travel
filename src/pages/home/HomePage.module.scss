@@ -4,3 +4,12 @@
   margin-right: auto;
   min-height: 75vh;
 }
+
+.page__spin {
+  margin: 200px auto;
+  width: 100%;
+  height: 100vh;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
