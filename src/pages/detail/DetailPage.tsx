@@ -3,12 +3,13 @@ import {useParams} from "react-router-dom"
 // import axios from "axios";
 import {Spin, Row, Col, DatePicker, Divider, Typography, Anchor, Menu} from "antd";
 import styles from "./Detail.module.scss";
-import {Header, Footer, ProductIntro, ProductComments} from "../../components";
+import {ProductIntro, ProductComments} from "../../components";
 import {commentMockData} from "./mockups";
 // import {productDetailSlice} from "../../redux/productDetail/slice";
 import {getProductDetail} from "../../redux/productDetail/slice";
 import {useSelector} from "../../redux/hooks";
 import {useDispatch} from "react-redux";
+import {MainLayout} from "../../layout";
 
 
 const {RangePicker} = DatePicker;
@@ -60,8 +61,7 @@ export const DetailPage: React.FC = () => {
 
   return (
     <>
-      <Header/>
-      <div className={styles.page__content}>
+      <MainLayout>
         {/*产品简介 与 日期选择*/}
         <div className={styles.product__intro__container}>
           <Row>
@@ -115,8 +115,7 @@ export const DetailPage: React.FC = () => {
             <ProductComments data={commentMockData}/>
           </div>
         </div>
-      </div>
-      <Footer/>
+      </MainLayout>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {Header, Footer, SideMenu, Carousel, ProductCollection, BusinessPartners} from '../../components'
+import {SideMenu, Carousel, ProductCollection, BusinessPartners} from '../../components'
 import {Row, Col, Typography, Spin} from 'antd'
 import sideImage from '../../assets/images/sider_2019_12-09.png'
 import sideImage2 from '../../assets/images/sider_2019_02-04.png'
@@ -9,6 +9,7 @@ import {withTranslation, WithTranslation} from "react-i18next";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {giveMeDataActionCreator} from "../../redux/recommendProduct/recommendProductActions";
+import {MainLayout} from "../../layout";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -47,8 +48,7 @@ class HomePageComponent extends React.Component<PropsType> {
     }
     return (
       <>
-        <Header/>
-        <div className={styles.page__content}>
+        <MainLayout>
           <Row style={{marginTop: 20}}>
             <Col span={6}>
               <SideMenu/>
@@ -73,8 +73,7 @@ class HomePageComponent extends React.Component<PropsType> {
             products={productList[2].touristRoutes}
           />
           <BusinessPartners/>
-        </div>
-        <Footer/>
+        </MainLayout>
       </>
     );
   }

@@ -1,9 +1,12 @@
 import React from 'react'
+import {UserLayout} from "../../layout";
 
 export const LoginPage: React.FC = () => {
   return (
     <>
-      <h1>登录页面</h1>
+      <UserLayout>
+        <h1>登录页面</h1>
+      </UserLayout>
     </>
   )
 }

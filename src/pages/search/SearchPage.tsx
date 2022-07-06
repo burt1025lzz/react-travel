@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react'
 import styles from './SearchPage.module.scss'
-import {Header, Footer, ProductList} from "../../components";
+import {ProductList} from "../../components";
 import {useParams, useLocation} from "react-router-dom";
 import {Spin} from "antd";
 import {searchProduct} from "../../redux/productSearch/slice";
 import {useSelector} from "../../redux/hooks";
 import {useDispatch} from "react-redux";
+import {MainLayout} from "../../layout";
 
 export const SearchPage: React.FC = () => {
   const {keywords} = useParams()
@@ -39,14 +40,12 @@ export const SearchPage: React.FC = () => {
 
   return (
     <>
-      <Header/>
-      <div className={styles.page__content}>
+      <MainLayout>
         {/*产品列表*/}
         <div className={styles.product__list__container}>
           <ProductList data={productList} paging={pagination} onPageChange={onPageChange}/>
         </div>
-      </div>
-      <Footer/>
+      </MainLayout>
     </>
   )
 }
