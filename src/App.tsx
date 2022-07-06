@@ -12,7 +12,7 @@ function App() {
           <Route index element={<HomePage/>}/>
           <Route path={'/login'} element={<LoginPage/>}/>
           <Route path={'/register'} element={<RegisterPage/>}/>
-          <Route path={'/detail/:id'} element={<DetailPage/>}/>
+          <Route path={'/detail/:touristRouteId'} element={<DetailPage/>}/>
           <Route path="/404" element={<h1>404 Page Not Found</h1>}/>
           <Route path={'*'} element={<Navigate replace to="/404"/>}/>
         </Routes>
