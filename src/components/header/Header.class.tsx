@@ -79,7 +79,7 @@ class HeaderComponent extends React.Component<PropsType> {
           </div>
         </div>
         <Layout.Header className={styles['main-header']}>
-          <Link to={'detail/123'}>
+          <Link to={'/'}>
             <img src={logo} alt="logo" className={styles['App-logo']}/>
             <Typography.Title level={3} className={styles.title}>{t('header.title')}</Typography.Title>
           </Link>
