@@ -1,0 +1,21 @@
+.page__content {
+  width: 1230px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 75vh;
+}
+
+.product__list__container {
+  padding: 20px;
+  margin-top: 20px;
+  background: white;
+}
+
+.page__spin {
+  margin: 200px auto;
+  width: 100%;
+  height: 100vh;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

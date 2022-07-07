@@ -6,11 +6,13 @@ import {actionLog} from "./middleware/actionLog";
 import {actionLanguage} from "./middleware/actionLanguage";
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import {productDetailSlice} from "./productDetail/slice";
+import {productSearchSlice} from './productSearch/slice'
 
 const rootReducer = combineReducers({
   language: languageReducer,
   recommendProduct: recommendProductReducer,
-  productDetail: productDetailSlice.reducer
+  productDetail: productDetailSlice.reducer,
+  productSearch: productSearchSlice.reducer
 })
 // const store = createStore(rootReducer, applyMiddleware(thunk, actionLog, actionLanguage))
 const store = configureStore({
