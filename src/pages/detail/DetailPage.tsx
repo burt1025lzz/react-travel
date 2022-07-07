@@ -1,29 +1,32 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {useParams} from "react-router-dom"
 import axios from "axios";
 import {Spin, Row, Col, DatePicker, Divider, Typography, Anchor, Menu} from "antd";
 import styles from "./Detail.module.scss";
 import {Header, Footer, ProductIntro, ProductComments} from "../../components";
 import {commentMockData} from "./mockups";
+import {productDetailSlice} from "../../redux/productDetail/slice";
+import {useSelector} from "../../redux/hooks";
+import {useDispatch} from "react-redux";
 
 const {RangePicker} = DatePicker;
 
 export const DetailPage: React.FC = () => {
   const {touristRouteId} = useParams()
-  const [loading, setLoading] = useState<boolean>(true)
-  const [product, setProduct] = useState<any>(null)
-  const [error, setError] = useState<string | null>(null)
+  const product = useSelector(state => state.productDetail.data)
+  const loading = useSelector(state => state.productDetail.loading)
+  const error = useSelector(state => state.productDetail.error)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
+      dispatch(productDetailSlice.actions.fetchStart())
       try {
         const {data} = await axios(`http://123.56.149.216:8080/api/touristRoutes/${touristRouteId}`)
-        setProduct(data)
+        dispatch(productDetailSlice.actions.fetchSuccess(data))
       } catch (error: any) {
-        setError(error.message)
+        dispatch(productDetailSlice.actions.fetchFail(error.message))
       }
-      setLoading(false)
     }
     fetchData().then(() => null)
   }, [])
