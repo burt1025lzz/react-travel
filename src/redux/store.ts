@@ -30,7 +30,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 // const store = createStore(rootReducer, applyMiddleware(thunk, actionLog, actionLanguage))
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware => [...getDefaultMiddleware(), actionLog, actionLanguage],
+  // middleware: getDefaultMiddleware => ([...getDefaultMiddleware(), actionLog, actionLanguage]),
+  middleware: getDefaultMiddleware => [...getDefaultMiddleware({
+    serializableCheck: false
+  }), actionLog, actionLanguage],
   devTools: true
 })
 
