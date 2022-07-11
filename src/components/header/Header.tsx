@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
                     {username}
                   </Typography.Text>
                 </span>
-                <Button>{t('header.shoppingCart')}</Button>
+                <Button onClick={() => navigate('/shop')}>{t('header.shoppingCart')}</Button>
                 <Button onClick={onLogout}>{t('header.signOut')}</Button>
               </Button.Group>
               :
