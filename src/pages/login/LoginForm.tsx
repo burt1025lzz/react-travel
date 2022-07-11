@@ -1,10 +1,27 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styles from './LoginForm.module.scss'
 import {Button, Checkbox, Form, Input} from 'antd';
+import {login} from "../../redux/user/slice";
+import {useDispatch} from "react-redux";
+import {useSelector} from "../../redux/hooks";
+import {useNavigate} from "react-router-dom";
 
 export const LoginForm: React.FC = () => {
+  const loading = useSelector(state => state.user.loading)
+  const jwt = useSelector(state => state.user.token)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    jwt && navigate('/')
+  }, [jwt])
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    dispatch<any>(login({
+      email: values.username,
+      password: values.password
+    }))
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -43,7 +60,7 @@ export const LoginForm: React.FC = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{offset: 8, span: 16}}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={loading}>
           Submit
         </Button>
       </Form.Item>
