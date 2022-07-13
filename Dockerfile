@@ -1,5 +1,5 @@
 FROM nginx:alpine
-COPY build /etc/nginx/html
-COPY conf /etc/nginx
+COPY build /usr/share/nginx/html
+COPY conf /usr/share/nginx
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
