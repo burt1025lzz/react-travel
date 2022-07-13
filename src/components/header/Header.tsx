@@ -73,7 +73,7 @@ export const Header: React.FC = () => {
           {
             jwt ?
               <Button.Group className={styles['button-group']}>
-                <span>
+                <span className={styles['user']}>
                   {t('header.welcome')}
                   <Typography.Text strong>
                     {username}
